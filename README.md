@@ -88,7 +88,7 @@ To update the settings:
 
 ## Feedback and Support
 
-If you encounter any issues or have suggestions for improvement, please [open an issue on GitHub](https://github.com/your-repo-url/issues). Your feedback is greatly appreciated!
+If you encounter any issues or have suggestions for improvement, please [open an issue on GitHub](https://github.com/wassamz/wassam-localai-ext/issues). Your feedback is greatly appreciated!
 
 ---
 
