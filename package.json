@@ -2,7 +2,7 @@
   "name": "wassam-localai-ext",
   "displayName": "Wassam Local AI Extension",
   "description": "AI Code Helper that runs locally on your computer with the help of Ollama.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "wassam",
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "icon": "images/wassam-icon-256.png",
   "categories": [
-    "Other"
+    "AI"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
