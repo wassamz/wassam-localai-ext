@@ -81,7 +81,7 @@ To update the settings:
 
 ## Release Notes
 
-### 1.1.0
+### 1.1.1
 - **Initial Release**: First version of the Local AI Helper extension with support for locally running LLMs via Ollama.
 
 ---
