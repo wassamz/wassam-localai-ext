@@ -1,11 +1,20 @@
 import * as vscode from "vscode";
 import { handleChatCommand } from "./commands/chatCommand";
 import { handleContextCommand } from "./commands/contextCommand";
-import { COMMAND, EXTENSION_NAME, EXTENSION_PARAM_LOCALMODEL } from "./types";
+import { handleFilesCommand } from "./commands/handelFilesCommand";
+import {
+  COMMAND,
+  EXTENSION_NAME,
+  EXTENSION_PARAM_LOCALMODEL,
+} from "./models/constants";
+import { FileInfo } from "./models/interfaces";
 import { getWebviewContent } from "./webview/webviewContent";
 
 let lastActiveEditor: vscode.TextEditor | undefined =
   vscode.window.activeTextEditor;
+
+// Store the list of files selected by the user.
+let fileList: FileInfo[] = [];
 
 export function activate(context: vscode.ExtensionContext) {
   // Update the last active editor when it changes.
@@ -36,16 +45,31 @@ export function activate(context: vscode.ExtensionContext) {
       // Set up the message listener.
       panel.webview.onDidReceiveMessage(async (message: any) => {
         const activeEditor = vscode.window.activeTextEditor || lastActiveEditor;
-        if (message.command === COMMAND.CHAT) {
-          await handleChatCommand(message.text, panel, activeEditor);
-        } else if (message.command === COMMAND.CONTEXT) {
-          handleContextCommand(panel, activeEditor);
+        switch (message.command) {
+          case COMMAND.CHAT:
+            await handleChatCommand(
+              message.text,
+              fileList,
+              panel,
+              message.useActiveEditor,
+              activeEditor
+            );
+            break;
+          case COMMAND.CONTEXT:
+            handleContextCommand(panel, activeEditor);
+            break;
+          case COMMAND.SELECTFILES:
+            fileList = await handleFilesCommand(panel, fileList);
+            break;
+          case COMMAND.CLEARFILES:
+            fileList = [];
+            break;
         }
       });
     }
   );
 
-  // Listen for configuration changes.
+  // Listen for configuration changes, and alert user of model used.
   vscode.workspace.onDidChangeConfiguration((event) => {
     if (
       event.affectsConfiguration(
