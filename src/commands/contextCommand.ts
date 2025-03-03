@@ -1,5 +1,6 @@
+import * as path from "path";
 import * as vscode from "vscode";
-import { getActiveDocumentFileName } from "../utils/editorUtils";
+import { COMMAND } from "../models/constants";
 
 export function handleContextCommand(
   panel: vscode.WebviewPanel,
@@ -11,7 +12,7 @@ export function handleContextCommand(
     if (!activeEditor.selection.isEmpty) {
       contextMessage = "Using Selected Text as Context.";
     } else {
-      const fileName = getActiveDocumentFileName(activeEditor);
+      const fileName = path.basename(activeEditor.document.fileName);
       contextMessage = `Using Active File as Context: ${fileName}`;
     }
   } else {
@@ -19,7 +20,7 @@ export function handleContextCommand(
   }
 
   panel.webview.postMessage({
-    command: "updateContext",
+    command: COMMAND.UPDATE_CONTEXT,
     text: contextMessage,
   });
 }
