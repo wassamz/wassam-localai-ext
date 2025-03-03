@@ -1,21 +1,25 @@
-# VSCode Local AI Helper
+# VSCode Local AI Chat
 
 A Visual Studio Code extension that enables you to use freely available Large Language Models (LLMs) locally on your machine. This extension provides improved privacy, reduced latency, and cost savings by running LLMs directly on your device.
+
+![screenshot](screenshot-1.png)
 
 ---
 
 ## Features
 
 - **Local LLM Integration**: Download and use any LLM supported by [Ollama](https://ollama.com/).
+- **Configurable Context**: Select any workspace files or text to add to the prompt context
 - **Privacy-First**: All processing happens locally on your machine, ensuring your data remains private.
 - **Low Latency**: Eliminates the need for cloud-based APIs, reducing response times.
 - **Cost-Effective**: No subscription fees or API costs—run models locally for free.
 - **Customizable**: Easily switch between different LLMs via the extension settings.
 
-> **Tip**: The size of the LLM that works on your machine depends on your system's memory. To estimate the storage size, multiply the number of parameters (P) by the size of the data type. For example, a 7B model using BF16 would require:
-> 
-> Storage Size (S) = 7 billion * 2 bytes = 14 billion bytes ≈ 14 GB
-> 
+> **Tip**: The size of the LLM that works on your machine depends on your system's memory. A rough estimate is Maximum Parameters ≈ (RAM in bytes) / (Bytes per parameter).
+>
+> For 16GB of RAM (≈16×10⁹ bytes) and using 2 bytes per parameter:
+> Maximum Parameters ≈ 16×10⁹ / 2 = 8 billion parameters.
+> Or just try each model size until you find a size and output speed you find acceptable
 
 ---
 
@@ -35,21 +39,6 @@ Before using this extension, ensure you have the following:
 
 3. **Default Model**:
    - By default, the extension uses the `deepseek-r1:1.5b` model. If you want to use a different model, update the extension settings.
-
----
-
-## Installation
-### Installing the extension manually
-```sh
-npm install -g @vscode/vsce
-vsce package
-```
-### Using Visual Studio
-1. Open Visual Studio Code.
-2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or pressing `Ctrl+Shift+X`.
-3. Search for "Local AI Helper" and install the extension.
-4. Reload Visual Studio Code to activate the extension.
-
 ---
 
 ## Usage
@@ -73,16 +62,33 @@ To update the settings:
 
 ---
 
-## Known Issues
+## Installation
+### Using Visual Studio
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window or pressing `Ctrl+Shift+X`.
+3. Search for "Local AI Chat" and install the extension.
+4. Reload Visual Studio Code to activate the extension.
 
-- **Text Formatting**: The LLM response may use custom tags that are not converted into HTML and instead left as plain text
-
+### Installing the extension manually
+```sh
+git clone https://github.com/wassamz/wassam-localai-ext
+npm install -g @vscode/vsce
+vsce package
+```
 ---
 
 ## Release Notes
 
-### 1.1.1
-- **Initial Release**: First version of the Local AI Helper extension with support for locally running LLMs via Ollama.
+### 2.0.0 - 2025-03-03
+### Added
+- **File Picker:** Users can now select one or more files to serve as context for the local AI prompt.
+- **Syntax Highlighting:** Code snippets are now displayed with color, leveraging Marked and Highlight.js.
+
+### Improved
+- **User Experience:** Minor visual enhancements and new keyboard shortcuts for improved usability. 
+
+### 1.1.1 - 2025-02-05
+- **Initial Release**: First version of the Local AI Chat extension with support for locally running LLMs via Ollama.
 
 ---
 
@@ -98,4 +104,4 @@ This extension is licensed under the [MIT License](https://opensource.org/licens
 
 ---
 
-Enjoy using Local AI Helper! 🚀
+Enjoy using Local AI Chat! 🚀
